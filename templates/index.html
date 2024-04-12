@@ -6,15 +6,16 @@
 <div class="product-container">
     {% for product in products %}
     <div class="product-card">
-        <a href="#">
-            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="Product">
+        <a href="/product/{{ loop.index0 }}">
+            <img src="{{ url_for('static', filename='images/' + product.images) }}" alt="Product">
             <div class="product-info">
                 {{ product.name }}
                 <p>{{ product.price }} р.</p>
             </div>
         </a>
-        <button class="buy-button">Buy</button> <!-- Добавленная кнопка -->
+        <button class="buy-button">Buy</button>
     </div>
     {% endfor %}
+
 </div>
 {% endblock %}
