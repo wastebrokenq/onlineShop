@@ -1,0 +1,71 @@
+/* --------------------------- COMMON STYLES --------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
+}
+
+/* --------------------------- BASE.HTML --------------------------- */
+header {
+    background-color: #242424;
+    padding: 20px;
+}
+
+nav {
+    float: right;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+}
+
+main {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+footer {
+    background-color: #242424;
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* --------------------------- BASE.HTML --------------------------- */
+
+/* Адаптивность */
+/* --------------------------- BASE.HTML --------------------------- */
+@media screen and (max-width: 768px) {
+    nav {
+        float: none;
+        text-align: center;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav li {
+        margin-bottom: 10px;
+    }
+}
