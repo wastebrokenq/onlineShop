@@ -11,7 +11,7 @@
         <a href="/" class="close_btn">&times;</a>
         <div class="gallery">
             {% for img in product.images %}
-            <img src="{{ url_for('static', filename='images/' + product.images) }}" alt="product image" class="{{ 'main-image' if loop.index == 1 else 'thumbnail' }}">
+            <img src="{{ url_for('static', filename='images/' ~ img) }}" alt="product image" class="{{ 'main-image' if loop.index == 1 else 'thumbnail' }}">
             {% endfor %}
         </div>    
         <div class="product_info">
