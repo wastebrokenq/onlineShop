@@ -9,7 +9,7 @@
         <a href="#">
             <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="Product">
             <div class="product-info">
-                <h3>{{ product.name }}</h3>
+                {{ product.name }}
                 <p>{{ product.price }} р.</p>
             </div>
         </a>
