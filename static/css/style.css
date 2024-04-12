@@ -20,6 +20,12 @@ body {
     color: #333;
 }
 
+a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
 /* --------------------------- HEADER STYLES --------------------------- */
 header {
     background-color: #fff;
@@ -66,13 +72,6 @@ nav li:nth-child(2) {
     /* Центрирование заголовка */
 }
 
-
-nav a {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s;
-}
-
 nav a:hover {
     color: #0056b3;
 }
@@ -93,12 +92,16 @@ main {
 
 .product-card {
     width: 360px;
-    height: 550px;
+    height: auto;
+    /* Изменено для более гибкой высоты вместимости кнопки */
     border-radius: 10px;
     margin: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* Вертикальное выравнивание содержимого */
 }
 
 .product-card img {
@@ -106,6 +109,39 @@ main {
     width: 100%;
     height: 350px;
 }
+
+.buy-button {
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 20px;
+    /* Отступы для отделения от информации о продукте */
+    transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+    background-color: #333;
+    /* Незначительное затемнение при наведении */
+}
+
+@media (max-width: 600px) {
+
+    /* Для устройств с шириной экрана до 600px */
+    .product-card {
+        width: 100%;
+        /* Карточка товара на всю ширину */
+    }
+
+    .buy-button {
+        width: calc(100% - 40px);
+        /* Занимает всю ширину карточки за вычетом отступов */
+    }
+}
+
 
 /* --------------------------- FOOTER STYLES --------------------------- */
 footer {
@@ -136,5 +172,16 @@ footer {
     .product-card {
         width: 80%;
         margin: 10px auto;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Для устройств с шириной экрана до 600px */
+    .product-card {
+        width: 100%; /* Карточка товара на всю ширину */
+    }
+
+    .buy-button {
+        width: calc(100% - 40px); /* Занимает всю ширину карточки за вычетом отступов */
     }
 }
