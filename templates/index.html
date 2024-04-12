@@ -1,2 +1,19 @@
-{% extends 'base.html' %}
-{% block title %} waste {% endblock %}
+{% extends "base.html" %}
+
+{% block title %}waste{% endblock %}
+
+{% block content %}
+<div class="product-container">
+    {% for product in products %}
+    <div class="product-card">
+        <a href="#">
+            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="Product">
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.price }} р.</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
