@@ -24,11 +24,20 @@ body {
     box-sizing: border-box;
 }
 
-.gallery img {
-    width: 90%;
-    display: block;
+.gallery .main-image {
+    width: 100%;
+    /* Основное изображение занимает всю ширину */
     margin-bottom: 10px;
 }
+
+.gallery .thumbnail {
+    width: 10%;
+    /* Маленькие превью */
+    display: inline-block;
+    /* Размещаем превью в одну линию */
+    margin-right: 2%;
+}
+
 
 .product_info {
     width: 50%;
@@ -40,7 +49,8 @@ body {
     margin-top: 0;
 }
 
-.price, .size {
+.price,
+.size {
     font-size: 18px;
 }
 
