@@ -87,21 +87,24 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    /* Это позволяет элементам равномерно распределиться по доступному пространству */
     padding: 20px;
 }
 
 .product-card {
-    width: 360px;
+    width: calc(33.333% - 20px);
+    /* Подгоняем ширину для трех карточек, вычитаем маржины */
     height: auto;
-    /* Изменено для более гибкой высоты вместимости кнопки */
     border-radius: 10px;
     margin: 10px;
+    /* Вы можете уменьшить маржин, если нужно больше места */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
     text-align: center;
     display: flex;
     flex-direction: column;
-    /* Вертикальное выравнивание содержимого */
+    align-items: center;
+    /* Центрируем содержимое по горизонтали */
 }
 
 .product-card img {
@@ -128,21 +131,6 @@ main {
     /* Незначительное затемнение при наведении */
 }
 
-@media (max-width: 600px) {
-
-    /* Для устройств с шириной экрана до 600px */
-    .product-card {
-        width: 100%;
-        /* Карточка товара на всю ширину */
-    }
-
-    .buy-button {
-        width: calc(100% - 40px);
-        /* Занимает всю ширину карточки за вычетом отступов */
-    }
-}
-
-
 /* --------------------------- FOOTER STYLES --------------------------- */
 footer {
     background-color: #fff;
@@ -153,6 +141,13 @@ footer {
 }
 
 /* --------------------------- RESPONSIVENESS --------------------------- */
+@media screen and (max-width: 1024px) {
+    .product-card {
+        width: calc(50% - 20px);
+        /* На устройствах с шириной 1024px и меньше - 2 карточки в ряд */
+    }
+}
+
 @media screen and (max-width: 768px) {
     nav {
         width: 100%;
@@ -171,17 +166,20 @@ footer {
 
     .product-card {
         width: 80%;
+        /* Один в ряд на устройствах средней ширины */
         margin: 10px auto;
+        /* Выравнивание по центру */
     }
 }
 
 @media (max-width: 600px) {
-    /* Для устройств с шириной экрана до 600px */
     .product-card {
-        width: 100%; /* Карточка товара на всю ширину */
+        width: 100%;
+        /* Карточка товара на всю ширину на самых маленьких устройствах */
     }
 
     .buy-button {
-        width: calc(100% - 40px); /* Занимает всю ширину карточки за вычетом отступов */
+        width: calc(100% - 40px);
+        /* Подстраиваем ширину кнопки */
     }
 }
