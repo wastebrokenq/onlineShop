@@ -32,12 +32,13 @@ body {
 
 .gallery .thumbnail {
     width: 10%;
-    /* Маленькие превью */
     display: inline-block;
     cursor: pointer;
     margin-bottom: 10px;
     margin-right: 2%;
+    border: 2px solid transparent; /* Стандартная прозрачная рамка */
 }
+
 
 .product_info {
     width: 50%;
