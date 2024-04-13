@@ -5,7 +5,7 @@ app = Flask(__name__)
 products = [
     {'name': 'Кокоа (мягкая игрушка)', 'price': 1500, 'description': '', 'images': ['cocoa.jpg']},
     {'name': 'Значки Комару, Кокоа и Комуги', 'price': 120, 'description': 'Размер: 3.7*3.7 см. Цена указана за один значок.', 'images': ['icons1.jpeg', 'icons2.jpeg']},
-    
+    {'name': 'Патч Wide Cocoa (велкро)', 'price': 650, 'description': 'Размер: 7*5 см.', 'images': ['patch.jpg', 'patch_cocoa.jpg']},
 ]
 
 @app.route("/")
