@@ -16,8 +16,9 @@
                 alt="Main Product Image" class="main-image">
             <div id="thumbnails">
                 {% for img in product.images %}
-                <img src="{{ url_for('static', filename='images/' + img) }}" alt="Product Image" class="thumbnail"
-                    onclick="changeMainImage('{{ url_for('static', filename='images/' + img) }}')">
+                <img src="{{ url_for('static', filename='images/' + img) }}" alt="Изображение продукта"
+                    class="thumbnail clickable-thumbnail"
+                    onclick="changeMainImage('{{ url_for('static', filename='images/' + img) }}', this)">
                 {% endfor %}
             </div>
         </div>
@@ -36,10 +37,25 @@
         </div>
     </div>
     <script>
-        function changeMainImage(src) {
+        function changeMainImage(src, element) {
             var mainImage = document.getElementById('mainImage');
             mainImage.src = src;
+
+            var thumbnails = document.getElementsByClassName('clickable-thumbnail');
+            for (var i = 0; i < thumbnails.length; i++) {
+                thumbnails[i].style.border = 'none';
+            }
+            element.style.border = '2px solid grey';
         }
+
+        window.onload = function () {
+            // Установка рамки для первой миниатюры при загрузке страницы
+            var firstThumbnail = document.getElementsByClassName('clickable-thumbnail')[0];
+            if (firstThumbnail) {
+                changeMainImage(firstThumbnail.src, firstThumbnail);
+            }
+        };
+
 
         function changeQuantity(change) {
             var quantity = parseInt(document.getElementById('quantity_input').value);
