@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ product.name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
 </head>
+
 <body>
     <div class="product_card">
         <a href="/" class="close_btn">&times;</a>
         <div class="gallery">
-            {% for img in product.images %}
-            <img src="{{ url_for('static', filename='images/' ~ img) }}" alt="product image" class="{{ 'main-image' if loop.index == 1 else 'thumbnail' }}">
-            {% endfor %}
-        </div>    
+            <img id="mainImage" src="{{ url_for('static', filename='images/' + product.images[0]) }}"
+                alt="Main Product Image" class="main-image">
+            <div id="thumbnails">
+                {% for img in product.images %}
+                <img src="{{ url_for('static', filename='images/' + img) }}" alt="Product Image" class="thumbnail"
+                    onclick="changeMainImage('{{ url_for('static', filename='images/' + img) }}')">
+                {% endfor %}
+            </div>
+        </div>
         <div class="product_info">
             <h1>{{ product.name }}</h1>
             <p class="price">{{ product.price }} р.</p>
@@ -22,13 +29,18 @@
                 <input type="text" value="1" id="quantity_input">
                 <button onclick="changeQuantity(1)">+</button>
             </div>
-            <button class="buy_button">Buy Now</button>
+            <button class="buy_button">BUY NOW</button>
             {% if product.get('description') %}
             <p class="description">{{ product.description }}</p>
             {% endif %}
         </div>
     </div>
     <script>
+        function changeMainImage(src) {
+            var mainImage = document.getElementById('mainImage');
+            mainImage.src = src;
+        }
+
         function changeQuantity(change) {
             var quantity = parseInt(document.getElementById('quantity_input').value);
             quantity = isNaN(quantity) ? 0 : quantity;
@@ -38,4 +50,5 @@
         }
     </script>
 </body>
+
 </html>

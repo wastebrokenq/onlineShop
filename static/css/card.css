@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Futura PT, Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .product_card {
@@ -34,10 +34,10 @@ body {
     width: 10%;
     /* Маленькие превью */
     display: inline-block;
-    /* Размещаем превью в одну линию */
+    cursor: pointer;
+    margin-bottom: 10px;
     margin-right: 2%;
 }
-
 
 .product_info {
     width: 50%;
@@ -73,12 +73,16 @@ body {
 }
 
 .buy_button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50;
+    padding: 15px 25px 15px 25px;
+    font-size: 12px;
+    font-weight: 300;
     color: white;
+    background-color: black;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    /* Отступы для отделения от информации о продукте */
+    transition: background-color 0.3s;
 }
 
 .description {
