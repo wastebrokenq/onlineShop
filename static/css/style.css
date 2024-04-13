@@ -82,36 +82,31 @@ main {
 .product-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    /* Это позволяет элементам равномерно распределиться по доступному пространству */
     padding: 20px;
+    margin-left: -10px; /* Компенсация левого отступа для первого элемента в каждом ряду */
+    margin-right: -10px; /* Компенсация правого отступа для последнего элемента в каждом ряду */
 }
 
 .product-card {
-    width: calc(33.333% - 20px);
-    /* Подгоняем ширину для трех карточек, вычитаем маржины */
-    height: auto;
-    border-radius: 10px;
-    margin: 10px;
-    /* Вы можете уменьшить маржин, если нужно больше места */
+    flex: 0 1 calc(33.333% - 20px); /* Каждая карточка будет занимать примерно треть родительского контейнера минус 20px на марджины */
+    margin: 10px 10px; /* Верхний и нижний отступы по 10px и левый и правый также по 10px */
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Центрируем содержимое по горизонтали */
 }
 
 .product-card img {
     border-radius: 10px;
-    max-width: 350px;  /* Максимальная ширина */
-    width: 100%;       /* Ширина равна 100% контейнера, но не более 350px */
-    max-height: 350px; /* Максимальная высота */
-    height: auto;      /* Высота автоматически настроится по пропорциям */
-    object-fit: contain; /* Гарантирует, что изображение будет сохранять пропорции внутри элемента */
+    max-width: 350px;
+    width: 100%;
+    max-height: 350px;
+    height: auto;
+    object-fit: contain;
 }
 
 .buy-button {
-    padding: 15px 25px 15px 25px;
+    padding: 15px 25px;
     font-size: 12px;
     font-weight: 300;
     color: white;
@@ -119,15 +114,14 @@ main {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 10px 20px;
-    /* Отступы для отделения от информации о продукте */
     transition: background-color 0.3s;
+    margin-top: 15px; /* Отступ сверху для кнопки */
 }
 
 .buy-button:hover {
     background-color: #333;
-    /* Незначительное затемнение при наведении */
 }
+
 
 /* --------------------------- FOOTER STYLES --------------------------- */
 footer {
@@ -163,10 +157,8 @@ footer {
     }
 
     .product-card {
-        width: 80%;
-        /* Один в ряд на устройствах средней ширины */
-        margin: 10px auto;
-        /* Выравнивание по центру */
+        flex: 0 1 100%; /* Каждая карточка будет занимать 100% ширины родительского контейнера */
+        margin: 10px 10px; /* Поддерживаем одинаковый отступ со всех сторон */
     }
 }
 
