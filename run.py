@@ -3,12 +3,9 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 products = [
-    {'name': 'Кокоа (мягкая игрушка)', 'price': 1500, 'images': ['cocoa.jpg']},
-    {'name': 'Значки Комару, Кокоа и Комуги', 'price': 120, 'images': ['icons1.jpeg', 'icons2.jpeg']},
-    {'name': 'Игрушечный мишка', 'price': 1200, 'images': ['cocoa.jpg']},
-    {'name': 'Игрушечный мишка', 'price': 1200, 'images': ['cocoa.jpg']},
-    {'name': 'Игрушечный мишка', 'price': 1200, 'images': ['cocoa.jpg']},
-    {'name': 'Плюшевый слон', 'price': 1800, 'images': ['cocoa.jpg']}
+    {'name': 'Кокоа (мягкая игрушка)', 'price': 1500, 'description': '', 'images': ['cocoa.jpg']},
+    {'name': 'Комару (мягкая игрушка)', 'price': 1500, 'description': '', 'images': ['comaru.jpg']},
+    {'name': 'Значки Комару, Кокоа и Комуги', 'price': 120, 'description': 'Размер: 3.7*3.7 см', 'images': ['icons1.jpeg', 'icons2.jpeg']},
 ]
 
 @app.route("/")

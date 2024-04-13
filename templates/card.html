@@ -29,10 +29,10 @@
                 <input type="text" value="1" id="quantity_input">
                 <button onclick="changeQuantity(1)">+</button>
             </div>
-            <button class="buy_button">BUY NOW</button>
             {% if product.get('description') %}
             <p class="description">{{ product.description }}</p>
             {% endif %}
+            <button class="buy_button">BUY NOW</button>
         </div>
     </div>
     <script>
