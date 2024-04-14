@@ -6,12 +6,8 @@
 <div class="product-container">
     {% for product in products %}
     <div class="product-card">
-        <a href="/product/{{ loop.index0 }}">
-            {% if product.images is string %}
-            <img src="{{ url_for('static', filename='images/' ~ product.images) }}" alt="Product">
-            {% else %}
-            <img src="{{ url_for('static', filename='images/' ~ product.images[0]) }}" alt="Product">
-            {% endif %}
+        <a href="/product/{{ product.id }}">
+            <img src="{{ url_for('static', filename='images/' ~ product.image_list()[0]) }}" alt="Product">
             <div class="product-info">
                 {{ product.name }}
                 <p>{{ product.price }} р.</p>

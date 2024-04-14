@@ -1,28 +1,46 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+import os
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your-secret-key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///products.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-products = [
-    {'name': 'Кокоа (мягкая игрушка)', 'price': 1500, 'description': '', 'images': ['cocoa.jpg']},
-    {'name': 'Значки Комару, Кокоа и Комуги', 'price': 120, 'description': 'Размер: 3.7*3.7 см. Цена указана за один значок.', 'images': ['icons1.jpeg', 'icons2.jpeg']},
-    {'name': 'Патч Wide Cocoa (велкро)', 'price': 650, 'description': 'Размер: 7*5 см.', 'images': ['patch.jpg', 'patch_cocoa.jpg']},
-    {'name': 'Вязаная Кокоа (брелочек)', 'price': 450, 'description': '', 'images': ['keychain_cocoa.jpg', 'keychain_cocoa2.jpg', 'keychain_cocoa3.jpg']},
-]
+db = SQLAlchemy(app)
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    price = db.Column(db.Integer)
+    description = db.Column(db.String(300))
+    images = db.Column(db.Text) 
+
+    def image_list(self):
+        return self.images.split(',') if self.images else []
+
+with app.app_context():
+    db.create_all()
+
+admin = Admin(app, name='ProductAdmin', template_mode='bootstrap3')
+admin.add_view(ModelView(Product, db.session))
 
 @app.route("/")
 @app.route("/index")
 def index():
+    products = Product.query.all()
     return render_template("index.html", products=products)
 
 @app.route("/about")
 def about():
     return render_template("about.html")
 
-@app.route("/product/<int:index>")
-def product(index):
-    product = products[index]
+@app.route("/product/<int:product_id>")
+def product(product_id):
+    product = Product.query.get_or_404(product_id)
     return render_template("card.html", product=product)
-   
 
 if __name__ == '__main__':
     app.run(debug=True)

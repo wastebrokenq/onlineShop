@@ -12,15 +12,16 @@
     <div class="product_card">
         <a href="/" class="close_btn">&times;</a>
         <div class="gallery">
-            <img id="mainImage" src="{{ url_for('static', filename='images/' + product.images[0]) }}"
+            <img id="mainImage" src="{{ url_for('static', filename='images/' + product.image_list()[0]) }}"
                 alt="Main Product Image" class="main-image">
             <div id="thumbnails">
-                {% for img in product.images %}
-                <img src="{{ url_for('static', filename='images/' + img) }}" alt="Изображение продукта"
+                {% for img in product.image_list() %}
+                <img src="{{ url_for('static', filename='images/' + img.strip()) }}" alt="Product Image"
                     class="thumbnail clickable-thumbnail"
-                    onclick="changeMainImage('{{ url_for('static', filename='images/' + img) }}', this)">
+                    onclick="changeMainImage('{{ url_for('static', filename='images/' + img.strip()) }}', this)">
                 {% endfor %}
             </div>
+
         </div>
         <div class="product_info">
             <h1>{{ product.name }}</h1>
@@ -30,7 +31,7 @@
                 <input type="text" value="1" id="quantity_input">
                 <button onclick="changeQuantity(1)">+</button>
             </div>
-            {% if product.get('description') %}
+            {% if product.description %}
             <p class="description">{{ product.description }}</p>
             {% endif %}
             <button class="buy_button">BUY NOW</button>
