@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
