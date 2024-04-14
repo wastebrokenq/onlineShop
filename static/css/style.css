@@ -72,6 +72,64 @@ nav li:nth-child(2) {
     /* Центрирование заголовка */
 }
 
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1000;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -560px;
+    width: 560px;
+    height: 100%;
+    padding: 40px;
+    background-color: white;
+    transition: right 0.5s;
+    z-index: 999;
+}
+
+.sidebar-heading {
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.order-button {
+    width: 100%;
+    padding: 15px 25px;
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px; /* Отступ сверху для кнопки */
+}
+
+.order-button:hover {
+    background-color: #333;
+}
+
+.close-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;   /* можно уменьшить, чтобы крестик был меньше */
+    color: black;      /* меняем цвет на черный */
+    font-weight: 100;  /* более тонкий шрифт */
+    z-index: 1000;
+    display: none;     /* по умолчанию скрыт */
+}
+
 /* --------------------------- MAIN CONTENT STYLES --------------------------- */
 main {
     flex: 1;

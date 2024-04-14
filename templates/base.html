@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -18,9 +19,19 @@
                 </li>
                 <li><a href="https://t.me/Komaru_merch">contacts</a></li>
             </ul>
+            <div id="cartIcon" class="cart-icon">&#x1F6D2;</div> <!-- Иконка корзины -->
+            <div id="closeIcon" class="close-icon fas fa-times" style="display: none;"></div>
         </nav>
     </header>
-
+    <div id="sidebar" class="sidebar"> <!-- Сайдбар для меню -->
+        <div class="sidebar-heading">
+            Ваш заказ
+        </div>
+        <hr>
+        <hr>
+        <button class="order-button">Оформить заказ</button>
+    </div>
+    </div>
     <main>
         {% block content %}{% endblock %}
     </main>
@@ -28,6 +39,22 @@
     <footer>
         <p>Copyright &copy; 2023</p>
     </footer>
+
+    <script>
+        document.getElementById('cartIcon').addEventListener('click', function () {
+            var sidebar = document.getElementById('sidebar');
+            document.getElementById('cartIcon').style.display = 'none';
+            document.getElementById('closeIcon').style.display = 'block';
+            sidebar.style.right = '0px';
+        });
+
+        document.getElementById('closeIcon').addEventListener('click', function () {
+            var sidebar = document.getElementById('sidebar');
+            document.getElementById('cartIcon').style.display = 'block';
+            document.getElementById('closeIcon').style.display = 'none';
+            sidebar.style.right = '-580px';
+        });
+    </script>
 </body>
 
 </html>
