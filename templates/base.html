@@ -20,7 +20,7 @@
                 </li>
                 <li><a href="https://t.me/Komaru_merch">contacts</a></li>
             </ul>
-            <div id="cartIcon" class="cart-icon">&#x1F6D2;</div> <!-- Иконка корзины -->
+            <div id="cartIcon" class="cart-icon">&#x1F6D2;</div>
             <div id="closeIcon" class="close-icon fas fa-times" style="display: none;"></div>
         </nav>
     </header>
@@ -29,7 +29,7 @@
             Ваш заказ
         </div>
         <hr>
-        <div id="cartItemsContainer"></div> <!-- Контейнер для элементов корзины -->
+        <div id="cartItemsContainer"></div>
         <hr>
         <button class="order-button">Оформить заказ</button>
     </div>
@@ -64,25 +64,21 @@
             document.getElementById('quantity_input').value = quantity;
         }
 
-        // Функция для добавления товара в корзину
         function addToCart() {
             var productName = document.querySelector('.product_info > h1').textContent;
             var productPrice = document.querySelector('.product_info .price').textContent;
             var productQuantity = parseInt(document.getElementById('quantity_input').value, 10);
 
-            // Структура для хранения данных продукта
             var product = {
                 name: productName,
                 price: productPrice,
                 quantity: productQuantity
             };
 
-            // Получаем текущую корзину из localStorage
             var cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.push(product);
             localStorage.setItem('cart', JSON.stringify(cart));
 
-            // Обновляем DOM корзины и видимость
             updateCartDOM();
             updateCartVisibility();
             openSidebar();
@@ -91,7 +87,7 @@
         function updateCartDOM() {
             var cart = JSON.parse(localStorage.getItem('cart')) || [];
             var cartItemsContainer = document.getElementById('cartItemsContainer');
-            cartItemsContainer.innerHTML = ''; // Очищаем текущий DOM контейнера корзины
+            cartItemsContainer.innerHTML = '';
 
             cart.forEach(function (item, index) {
                 var cartContent = document.createElement('div');
@@ -112,7 +108,7 @@
             document.getElementById('cartIcon').style.display = 'none';
             document.getElementById('closeIcon').style.display = 'block';
             sidebar.style.right = '0px';
-            overlay.style.display = 'block'; // Показ overlay
+            overlay.style.display = 'block';
         }
 
         function closeSidebar() {
@@ -121,7 +117,7 @@
             document.getElementById('cartIcon').style.display = 'block';
             document.getElementById('closeIcon').style.display = 'none';
             sidebar.style.right = '-580px';
-            overlay.style.display = 'none'; // Скрытие overlay
+            overlay.style.display = 'none';
         }
 
         document.getElementById('closeIcon').addEventListener('click', closeSidebar);
@@ -131,9 +127,9 @@
             var cartIcon = document.getElementById('cartIcon');
 
             if (cart.length > 0) {
-                cartIcon.style.display = 'block';  // Показать иконку корзины, если она есть
+                cartIcon.style.display = 'block'; 
             } else {
-                cartIcon.style.display = 'none';  // Скрыть иконку корзины, если она пуста
+                cartIcon.style.display = 'none'; 
             }
         }
 
@@ -152,21 +148,19 @@
         function removeFromCart(index) {
             var cart = JSON.parse(localStorage.getItem('cart')) || [];
             if (index > -1 && index < cart.length) {
-                cart.splice(index, 1); // Удаляем элемент по индексу
-                localStorage.setItem('cart', JSON.stringify(cart)); // Сохраняем обновленный массив в localStorage
-                updateCartDOM(); // Обновляем DOM
-                updateCartVisibility(); // Обновление видимости иконки корзины
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDOM();
+                updateCartVisibility();
             }
         }
 
         window.onload = function () {
-            // Установка рамки для первой миниатюры, если есть
             var firstThumbnail = document.getElementsByClassName('clickable-thumbnail')[0];
             if (firstThumbnail) {
                 changeMainImage(firstThumbnail.src, firstThumbnail);
             }
 
-            // Загрузка данных корзины и обновление DOM
             updateCartDOM();
             updateCartVisibility();
         };        
