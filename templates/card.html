@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ product.name }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
-</head>
+{% block title %} {{ product.name }} {% endblock %}
+{% block css %} <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/card.css') }}"> {% endblock %}
 
-<body>
+{% block content %}
     <div class="product_card">
         <a href="/" class="close_btn">&times;</a>
         <div class="gallery">
@@ -66,6 +61,6 @@
             document.getElementById('quantity_input').value = quantity;
         }
     </script>
-</body>
+{% endblock %}
 
 </html>
