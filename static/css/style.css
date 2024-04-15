@@ -26,6 +26,13 @@ a {
     transition: color 0.3s;
 }
 
+#sidebar hr {
+    height: 1px;          /* Указываем высоту линии */
+    border-width: 0;      /* Убираем стандартные границы */
+    background-color: #ccc; /* Цвет линии */
+    margin: 30px 0;
+}
+
 /* --------------------------- HEADER STYLES --------------------------- */
 header {
     background-color: #f4f4f4;
