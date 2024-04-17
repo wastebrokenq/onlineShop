@@ -1,14 +1,16 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, session, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_login import UserMixin, LoginManager, current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import timedelta
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'lorsikponosik'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///onlineShop.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds=30)
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
@@ -84,7 +86,10 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    session.clear()  # Удаление данных из сессии
+    response = make_response(redirect(url_for('login')))
+    response.set_cookie('session', '', expires=0)  # Удаление cookie
+    return response
 
 if __name__ == '__main__':
     with app.app_context():
