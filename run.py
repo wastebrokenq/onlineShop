@@ -6,16 +6,21 @@ from flask_login import UserMixin, LoginManager, current_user, login_user, logou
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
 
+# Инициализация Flask приложения
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'lorsikponosik'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///onlineShop.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds=30)
 
+# Конфигурация приложения
+app.config['SECRET_KEY'] = 'lorsikponosik' # Секретный ключ для поддержания сессии
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///onlineShop.db' # Путь к базе данных
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Отключение отслеживания модификаций в SQLAlchemy
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds=30) # Временной интервал после которого сессия истекает
+
+# Инициализация SQLAlchemy и LoginManager
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'login' # Указывается представление, которое необходимо использовать для входа
 
+# Описание моделей данных
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True)
@@ -36,6 +41,7 @@ class Product(db.Model):
         return self.images.split(',') if self.images else []
 
 
+# Кастомные представления для Admin интерфейса
 class MyModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.is_admin
@@ -50,9 +56,11 @@ class MyAdminIndexView(AdminIndexView):
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login'))
 
+# Инициализация Admin интерфейса
 admin = Admin(app, name='ProductAdmin', template_mode='bootstrap3', index_view=MyAdminIndexView())
 admin.add_view(MyModelView(Product, db.session))
 
+# Определение маршрутов и представлений
 @app.route("/")
 @app.route("/index")
 def index():
@@ -91,13 +99,14 @@ def logout():
     response.set_cookie('session', '', expires=0)  # Удаление cookie
     return response
 
+# Запуск приложения
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
-        if User.query.filter_by(username='admin').first() is None:
+        db.create_all()  # Создание таблиц, если они еще не созданы
+        if User.query.filter_by(username='admin').first() is None: # Создание администратора, если его нет
             hashed_password = generate_password_hash('d1letantoss676', method='pbkdf2:sha256')
             admin_user = User(username='admin', password=hashed_password, is_admin=True)
             db.session.add(admin_user)
             db.session.commit()
 
-    app.run(debug=True)
+    app.run(debug=True) # Запуск приложения в режиме отладки
