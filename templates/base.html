@@ -21,7 +21,7 @@
                 <li><a href="https://t.me/Komaru_merch">contacts</a></li>
             </ul>
             <div id="cartIcon" class="cart-icon">
-                <img src="../static/icons/cart.svg" alt="">
+                <img src="../static/icons/cart.svg" alt="cartIcon">
             </div>
             <div id="closeIcon" class="close-icon fas fa-times" style="display: none;"></div>
         </nav>
@@ -33,6 +33,7 @@
         <hr>
         <div id="cartItemsContainer"></div>
         <hr>
+        <div id="cartTotal" class="cart-total"></div>
         <button class="order-button">Оформить заказ</button>
     </div>
     <main>
@@ -43,161 +44,7 @@
         <p>Copyright &copy; 2023</p>
     </footer>
 
-    <script>
-        document.getElementById('cartIcon').addEventListener('click', function () {
-            var sidebar = document.getElementById('sidebar');
-            document.getElementById('cartIcon').style.display = 'none';
-            document.getElementById('closeIcon').style.display = 'block';
-            sidebar.style.right = '0px';
-        });
-
-        document.getElementById('closeIcon').addEventListener('click', function () {
-            var sidebar = document.getElementById('sidebar');
-            document.getElementById('cartIcon').style.display = 'block';
-            document.getElementById('closeIcon').style.display = 'none';
-            sidebar.style.right = '-580px';
-        });
-
-        function changeQuantity(change) {
-            var quantity = parseInt(document.getElementById('quantity_input').value);
-            quantity = isNaN(quantity) ? 0 : quantity;
-            quantity += change;
-            if (quantity < 1) quantity = 1;
-            document.getElementById('quantity_input').value = quantity;
-        }
-
-        function addToCart() {
-            var productName = document.querySelector('.product_info > h1').textContent;
-            var productPrice = document.querySelector('.product_info .price').textContent;
-            var productQuantity = parseInt(document.getElementById('quantity_input').value, 10);
-
-            var product = {
-                name: productName,
-                price: productPrice,
-                quantity: productQuantity
-            };
-
-            var cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.push(product);
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            updateCartDOM();
-            updateCartVisibility();
-            openSidebar();
-        }
-
-        function updateCartDOM() {
-            var cart = JSON.parse(localStorage.getItem('cart')) || [];
-            var cartItemsContainer = document.getElementById('cartItemsContainer');
-            cartItemsContainer.innerHTML = '';
-        
-            cart.forEach(function (item, index) {
-                var cartContent = document.createElement('div');
-                cartContent.className = "cart-item";
-                cartContent.innerHTML = `
-                    <h4 class="cart-item-name">${item.name}</h4>
-                    <div class="cart-item-quantity">
-                        <button class="sidebar-button" onclick="decreaseQuantity(${index})">
-                            <img class="sidebar-icon" src="../static/icons/remove.svg" alt="-">
-                        </button>
-                        <p>${item.quantity}</p>
-                        <button class="sidebar-button" onclick="increaseQuantity(${index})">
-                            <img class="sidebar-icon" src="../static/icons/add.svg" alt="-">
-                        </button>
-                    </div>
-                    <p class="cart-item-price">${item.price}</p>
-                    <button class="sidebar-button" onclick="removeFromCart(${index})">
-                        <img class="sidebar-icon" src="../static/icons/cancel.svg" alt="x">
-                    </button>
-                `;
-                cartItemsContainer.appendChild(cartContent);
-            });
-        }
-        
-
-        function openSidebar() {
-            var sidebar = document.getElementById('sidebar');
-            var overlay = document.getElementById('overlay');
-            document.getElementById('cartIcon').style.display = 'none';
-            document.getElementById('closeIcon').style.display = 'block';
-            sidebar.style.right = '0px';
-            overlay.style.display = 'block';
-        }
-
-        function closeSidebar() {
-            var sidebar = document.getElementById('sidebar');
-            var overlay = document.getElementById('overlay');
-            document.getElementById('cartIcon').style.display = 'block';
-            document.getElementById('closeIcon').style.display = 'none';
-            sidebar.style.right = '-580px';
-            overlay.style.display = 'none';
-        }
-
-        document.getElementById('closeIcon').addEventListener('click', closeSidebar);
-
-        function updateCartVisibility() {
-            var cart = JSON.parse(localStorage.getItem('cart')) || [];
-            var cartIcon = document.getElementById('cartIcon');
-
-            if (cart.length > 0) {
-                cartIcon.style.display = 'block'; 
-            } else {
-                cartIcon.style.display = 'none'; 
-            }
-        }
-
-        document.querySelector('.buy_button').addEventListener('click', addToCart);
-
-        function changeMainImage(src, element) {
-            var mainImage = document.getElementById('mainImage');
-            mainImage.src = src;
-            var thumbnails = document.getElementsByClassName('clickable-thumbnail');
-            for (var i = 0; i < thumbnails.length; i++) {
-                thumbnails[i].style.border = 'none';
-            }
-            element.style.border = '2px solid grey';
-        }
-
-        function increaseQuantity(index) {
-            var cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (index >= 0 && index < cart.length) {
-                cart[index].quantity += 1;  // Увеличиваем количество на 1
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartDOM(); // Обновляем DOM
-            }
-        }
-        
-        function decreaseQuantity(index) {
-            var cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (index >= 0 && index < cart.length && cart[index].quantity > 1) {
-                cart[index].quantity -= 1;  // Уменьшаем количество на 1
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartDOM(); // Обновляем DOM
-            } else if (cart[index].quantity === 1) {
-                removeFromCart(index); // Если количество становится 0, удаляем элемент
-            }
-        }
-
-        function removeFromCart(index) {
-            var cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (index > -1 && index < cart.length) {
-                cart.splice(index, 1);
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartDOM();
-                updateCartVisibility();
-            }
-        }
-
-        window.onload = function () {
-            var firstThumbnail = document.getElementsByClassName('clickable-thumbnail')[0];
-            if (firstThumbnail) {
-                changeMainImage(firstThumbnail.src, firstThumbnail);
-            }
-
-            updateCartDOM();
-            updateCartVisibility();
-        };        
-    </script>
+    <script src="../static/js/scripts.js"></script>
 </body>
 
 </html>
