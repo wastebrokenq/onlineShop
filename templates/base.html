@@ -90,19 +90,30 @@
             var cart = JSON.parse(localStorage.getItem('cart')) || [];
             var cartItemsContainer = document.getElementById('cartItemsContainer');
             cartItemsContainer.innerHTML = '';
-
+        
             cart.forEach(function (item, index) {
                 var cartContent = document.createElement('div');
                 cartContent.className = "cart-item";
                 cartContent.innerHTML = `
-                    <h4>Наименование: ${item.name}</h4>
-                    <p>Цена: ${item.price}</p>
-                    <p>Количество: ${item.quantity}</p>
-                    <button onclick="removeFromCart(${index})">Удалить</button>
+                    <h4 class="cart-item-name">${item.name}</h4>
+                    <div class="cart-item-quantity">
+                        <button class="sidebar-button" onclick="decreaseQuantity(${index})">
+                            <img class="sidebar-icon" src="../static/icons/remove.svg" alt="-">
+                        </button>
+                        <p>${item.quantity}</p>
+                        <button class="sidebar-button" onclick="increaseQuantity(${index})">
+                            <img class="sidebar-icon" src="../static/icons/add.svg" alt="-">
+                        </button>
+                    </div>
+                    <p class="cart-item-price">${item.price}</p>
+                    <button class="sidebar-button" onclick="removeFromCart(${index})">
+                        <img class="sidebar-icon" src="../static/icons/cancel.svg" alt="x">
+                    </button>
                 `;
                 cartItemsContainer.appendChild(cartContent);
             });
         }
+        
 
         function openSidebar() {
             var sidebar = document.getElementById('sidebar');
@@ -145,6 +156,26 @@
                 thumbnails[i].style.border = 'none';
             }
             element.style.border = '2px solid grey';
+        }
+
+        function increaseQuantity(index) {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (index >= 0 && index < cart.length) {
+                cart[index].quantity += 1;  // Увеличиваем количество на 1
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDOM(); // Обновляем DOM
+            }
+        }
+        
+        function decreaseQuantity(index) {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (index >= 0 && index < cart.length && cart[index].quantity > 1) {
+                cart[index].quantity -= 1;  // Уменьшаем количество на 1
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDOM(); // Обновляем DOM
+            } else if (cart[index].quantity === 1) {
+                removeFromCart(index); // Если количество становится 0, удаляем элемент
+            }
         }
 
         function removeFromCart(index) {

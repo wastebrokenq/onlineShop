@@ -137,6 +137,45 @@ nav li:nth-child(2) {
     display: none;     /* по умолчанию скрыт */
 }
 
+/* --------------------------- SIDEBAR --------------------------- */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px; /* Расстояние между элементами списка */
+}
+
+.cart-item-name, .cart-item-quantity, .cart-item-price {
+    flex: 1; /* Равномерное распределение элементов */
+    text-align: center;
+}
+
+.cart-item-quantity p {
+    display: inline-block; /* Чтобы число оставалось между кнопками */
+    margin: 0 10px;
+}
+
+.cart-item-quantity {
+    background: none;
+    border: none;
+}
+
+.sidebar-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.sidebar-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar-button:focus {
+    outline: none;
+}
+
+
 /* --------------------------- MAIN CONTENT STYLES --------------------------- */
 main {
     flex: 1;

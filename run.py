@@ -109,4 +109,4 @@ if __name__ == '__main__':
             db.session.add(admin_user)
             db.session.commit()
 
-    app.run(debug=False) # Запуск приложения в режиме отладки
+    app.run(debug=True) # Запуск приложения в режиме отладки
