@@ -283,4 +283,31 @@ footer {
         width: calc(100% - 40px);
         /* Подстраиваем ширину кнопки */
     }
+
+    .sidebar {
+        width: 100%; /* полная ширина экрана */
+    }
+}
+
+/* Планшеты */
+@media (min-width: 601px) and (max-width: 968px) {
+    .sidebar {
+        width: 50%; /* ширина корзины составляет 50% от ширины экрана */
+    }
+}
+
+@media (min-width: 601px) {
+    .cart-item {
+        flex-direction: row; /* Возвращаем в ряд на планшетах и десктопах */
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .cart-item-name, .cart-item-price {
+        text-align: center; /* Возвращаем центрирование текста */
+    }
+
+    .cart-item-quantity p {
+        margin: 0 15px; /* Увеличиваем отступы в больших экранах */
+    }
 }
