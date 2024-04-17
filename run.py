@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'lorsikponosik' # Секретный ключ для поддержания сессии
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///onlineShop.db' # Путь к базе данных
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Отключение отслеживания модификаций в SQLAlchemy
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds=30) # Временной интервал после которого сессия истекает
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30) # Временной интервал после которого сессия истекает
 
 # Инициализация SQLAlchemy и LoginManager
 db = SQLAlchemy(app)
@@ -109,4 +109,4 @@ if __name__ == '__main__':
             db.session.add(admin_user)
             db.session.commit()
 
-    app.run(debug=True) # Запуск приложения в режиме отладки
+    app.run(host='0.0.0.0', debug=False) # Запуск приложения в режиме отладки
