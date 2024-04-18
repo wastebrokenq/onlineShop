@@ -51,7 +51,7 @@ class Order(db.Model):
     phone_number = db.Column(db.String(20), nullable=False)
     comment = db.Column(db.Text)
     payment_method = db.Column(db.String(50), default='Кредитной картой')
-    status = db.Column(db.String(100), default='pending')  # Например, 'pending', 'shipped', 'delivered'
+    status = db.Column(db.String(100), default='pending') 
 
 # Кастомные представления для Admin интерфейса
 class MyModelView(ModelView):
@@ -72,7 +72,7 @@ class MyAdminIndexView(AdminIndexView):
 admin = Admin(app, name='ProductAdmin', template_mode='bootstrap3', index_view=MyAdminIndexView())
 admin.add_view(MyModelView(Product, db.session))
 
-# Определение маршрутов и представлений
+
 @app.route("/")
 @app.route("/index")
 def index():
@@ -102,7 +102,7 @@ def submit_order():
         address=request.form['address'],
         postal_code=request.form['postal_code'],
         phone_number=request.form['phone'],
-        comment=request.form.get('comment', ''),  # используйте пустую строку как значение по умолчанию
+        comment=request.form.get('comment', ''),
         payment_method=request.form['payment_method']
     )
     db.session.add(order)
@@ -142,4 +142,4 @@ if __name__ == '__main__':
             db.session.add(admin_user)
             db.session.commit()
 
-    app.run(debug=True) # Запуск приложения в режиме отладки
+    app.run(debug=True, host='0.0.0.0') # Запуск приложения в режиме отладки
