@@ -1,0 +1,152 @@
+/* Подключение Google Fonts для современного шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+input,
+button,
+select,
+textarea {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background-color: #eeeeee;
+    color: #333;
+    line-height: 1.6;
+}
+
+.header {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    font-weight: 400;
+    color: #222;
+}
+
+.close-button {
+    color: #777;
+    position: absolute;
+    right: 30px;
+    top: 22px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.container {
+    background-color: #ffffff;
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    margin-top: 1rem;
+    font-size: 15px;
+    color: #444;
+}
+
+input[type="email"],
+input[type="url"],
+input[type="text"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #000000;
+}
+
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #000000;
+    outline: none;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+
+    .header,
+    .container {
+        padding: 1rem;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .form-label,
+    input[type="email"],
+    input[type="url"],
+    input[type="text"],
+    input[type="tel"],
+    textarea,
+    select,
+    input[type="submit"] {
+        font-size: 14px;
+    }
+
+    .container {
+        margin: 1rem;
+        padding: 1rem;
+        max-width: auto;
+    }
+}
+
+/* Адаптация для очень маленьких экранов */
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .close-button {
+        font-size: 20px;
+        right: 10px;
+        top: 10px;
+    }
+
+    input[type="submit"] {
+        padding: 10px;
+    }
+}
