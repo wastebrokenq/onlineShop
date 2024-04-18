@@ -53,11 +53,6 @@ class Order(db.Model):
     payment_method = db.Column(db.String(50), default='Кредитной картой')
     status = db.Column(db.String(100), default='pending')  # Например, 'pending', 'shipped', 'delivered'
 
-    user = db.relationship('User', backref='orders')
-
-    def __repr__(self):
-        return f"<Order {self.id} by User {self.user_id}>"
-
 # Кастомные представления для Admin интерфейса
 class MyModelView(ModelView):
     def is_accessible(self):
