@@ -1,6 +1,10 @@
 document.getElementById('cartIcon').addEventListener('click', openSidebar);
 document.getElementById('closeIcon').addEventListener('click', closeSidebar);
-document.querySelector('.buy_button').addEventListener('click', addToCart);
+const buyButton = document.querySelector('.buy_button');
+if (buyButton) {
+    buyButton.addEventListener('click', addToCart);
+}
+
 
 window.onload = function() {
     var firstThumbnail = document.getElementsByClassName('clickable-thumbnail')[0];
@@ -17,7 +21,6 @@ function openSidebar() {
     document.getElementById('cartIcon').style.display = 'none';
     document.getElementById('closeIcon').style.display = 'block';
     sidebar.style.right = '0px';
-    overlay.style.display = 'block';
 }
 
 function closeSidebar() {
@@ -26,7 +29,6 @@ function closeSidebar() {
     document.getElementById('cartIcon').style.display = 'block';
     document.getElementById('closeIcon').style.display = 'none';
     sidebar.style.right = '-580px';
-    overlay.style.display = 'none';
 }
 
 function changeMainImage(src, element) {
