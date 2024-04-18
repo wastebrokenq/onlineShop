@@ -17,7 +17,6 @@ window.onload = function() {
 
 function openSidebar() {
     var sidebar = document.getElementById('sidebar');
-    var overlay = document.getElementById('overlay');
     document.getElementById('cartIcon').style.display = 'none';
     document.getElementById('closeIcon').style.display = 'block';
     sidebar.style.right = '0px';
@@ -25,7 +24,6 @@ function openSidebar() {
 
 function closeSidebar() {
     var sidebar = document.getElementById('sidebar');
-    var overlay = document.getElementById('overlay');
     document.getElementById('cartIcon').style.display = 'block';
     document.getElementById('closeIcon').style.display = 'none';
     sidebar.style.right = '-580px';
