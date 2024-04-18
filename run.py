@@ -39,7 +39,24 @@ class Product(db.Model):
 
     def image_list(self):
         return self.images.split(',') if self.images else []
+    
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), nullable=False)
+    vk_link = db.Column(db.String(255))
+    full_name = db.Column(db.String(200), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    postal_code = db.Column(db.String(20), nullable=False)
+    phone_number = db.Column(db.String(20), nullable=False)
+    comment = db.Column(db.Text)
+    payment_method = db.Column(db.String(50), default='Кредитной картой')
+    status = db.Column(db.String(100), default='pending')  # Например, 'pending', 'shipped', 'delivered'
 
+    user = db.relationship('User', backref='orders')
+
+    def __repr__(self):
+        return f"<Order {self.id} by User {self.user_id}>"
 
 # Кастомные представления для Admin интерфейса
 class MyModelView(ModelView):
@@ -75,6 +92,27 @@ def about():
 def product(product_id):
     product = Product.query.get_or_404(product_id)
     return render_template("card.html", product=product)
+
+@app.route('/order')
+def order():
+    return render_template('order_form.html')
+
+@app.route('/submit_order', methods=['POST'])
+def submit_order():
+    order = Order(
+        email=request.form['email'],
+        vk_link=request.form['vk_link'],
+        full_name=request.form['full_name'],
+        country=request.form['country'],
+        address=request.form['address'],
+        postal_code=request.form['postal_code'],
+        phone_number=request.form['phone'],
+        comment=request.form.get('comment', ''),  # используйте пустую строку как значение по умолчанию
+        payment_method=request.form['payment_method']
+    )
+    db.session.add(order)
+    db.session.commit()
+    return 'Заказ получен'
 
 @login_manager.user_loader
 def load_user(user_id):

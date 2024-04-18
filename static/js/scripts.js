@@ -5,6 +5,9 @@ if (buyButton) {
     buyButton.addEventListener('click', addToCart);
 }
 
+document.querySelector('.order-button').addEventListener('click', function() {
+    window.location.href = '/order';
+});
 
 window.onload = function() {
     var firstThumbnail = document.getElementsByClassName('clickable-thumbnail')[0];
